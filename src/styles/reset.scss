@@ -1,0 +1,15 @@
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
