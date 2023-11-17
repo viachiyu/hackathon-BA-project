@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"; // Import the navigate function 
 import Close from "../../assets/icons/down-arrow.svg";
 import "./Modal.css";
 import error from "../../assets/icons/down-arrow.svg";
+import users from "../../data/users";
+import vouchers from "../../data/vouchers";
 
 function SubmitEmailModal({ closeModal }) {
   const navigate = useNavigate();
@@ -15,15 +17,24 @@ function SubmitEmailModal({ closeModal }) {
     voucherUsed: false,
     submitError: false,
   });
-  const [email, setEmail] = useState({
-    email: "",
+  const [email, setEmail] = useState("");
+
+  const [modalMessage, setModalMessage] = useState({
+    title: `Your eVouchers`,
+    text: `Unsure whether you've got an eVoucher to use or how much you've
+  got to spend? Enter your email address below to check.`,
   });
+  let isUserFound = false;
+  let foundUser = {};
+  let foundVoucher = {};
+
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setEmail({ ...email, [name]: value });
+    const email = event.target;
+    setEmail(email.value);
   };
+
   const isEmailValid = () => {
-    if (!email.email.includes("@")) {
+    if (!email.includes("@")) {
       return false;
     }
     return true;
@@ -40,55 +51,59 @@ function SubmitEmailModal({ closeModal }) {
     });
     return emailValid;
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateForm()) {
       return;
     }
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/api/users",
-        email
-      );
-      if (!response.data) {
-        setErrors({
-          ...errors,
-          noUserFound: true,
-        });
-      } else {
-        // Destructure directly if you're not using the whole response object
-        const { hasVoucher, voucherUsed } = response.data;
-        if (!hasVoucher) {
-          setErrors({
-            ...errors,
-            noVoucher: true,
-          });
-        } else if (voucherUsed) {
-          setErrors({
-            ...errors,
-            voucherUsed: true,
-          });
-        } else {
-          const voucherResponse = await axios.get(
-            `http://localhost:8080/api/vouchers?email=${email.email}`
-          );
-
-          if (voucherResponse.status === 201) {
-            navigate("/suggestions");
-            setTimeout(() => {
-              navigate("/features");
-            }, 4000);
-          }
-        }
+    users.forEach((user) => {
+      if (user.email === email) {
+        isUserFound = true;
+        foundUser = user;
+        return foundUser;
       }
-    } catch (error) {
-      console.error(error);
+    });
+
+    if (!isUserFound) {
       setErrors({
         ...errors,
-        submitError: true,
+        noUserFound: true,
       });
+      setModalMessage({
+        title: "No eVouchers",
+        text: `It seems like there are no vouchers linked to this email. No
+        worries - plenty of exciting flight deals await!`,
+      });
+      return;
     }
+
+    const findVoucher = () => {
+      vouchers.forEach((voucher) => {
+        if (foundUser.voucher_id === voucher.id) {
+          foundVoucher = voucher;
+          return foundVoucher;
+        }
+      });
+      if (!foundVoucher) {
+        setErrors({
+          ...errors,
+          noVoucher: true,
+        });
+        return;
+      }
+
+      if (foundVoucher.isUsed === true) {
+        setErrors({
+          ...errors,
+          voucherUsed: true,
+        });
+        return;
+      }
+      return setTimeout(navigate("/feature"), 4000);
+    };
+    findVoucher();
   };
+
   return (
     <div className="submitmodal__background">
       <div className="submitmodal__container">
@@ -102,11 +117,8 @@ function SubmitEmailModal({ closeModal }) {
           </button>
         </div>
         <div className="submitmodal__title">
-          <p>You're eVouchers</p>
-          <p>
-            Unsure whether you've got an eVoucher to use or how much you've got
-            to spend? Enter your email address below to check.
-          </p>
+          <p>{modalMessage.title}</p>
+          <p>{modalMessage.text}</p>
         </div>
         <div className="submitmodal__body">
           <input
@@ -124,30 +136,6 @@ function SubmitEmailModal({ closeModal }) {
             <div className="details__error-container">
               <img src={error} className="details__icon" />
               <p className="details__error">This field is required</p>
-            </div>
-          )}
-          {errors.invalidEmail && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">Please enter a valid email</p>
-            </div>
-          )}
-          {errors.noUserFound && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">No user found</p>
-            </div>
-          )}
-          {errors.noVoucher && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">No voucher for this user</p>
-            </div>
-          )}
-          {errors.voucherUsed && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">Voucher has been used up</p>
             </div>
           )}
         </div>
