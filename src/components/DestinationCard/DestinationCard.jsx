@@ -1,20 +1,26 @@
 import "./DestinationCard.scss";
+import prague from "../../assets/images/Prague.svg";
+import barcelona from "../../assets/images/Barcelona.svg";
+import amsterdam from "../../assets/images/Amsterdam.svg";
+import venice from "../../assets/images/Venice.svg";
+import athens from "../../assets/images/Athens.svg";
+import paris from "../../assets/images/Paris.svg";
 
-function DestinationCard() {
+const images = [prague, barcelona, amsterdam, venice, paris, athens];
+
+function DestinationCard({ destination }) {
   return (
     <article className="card">
-      <div className="card__wrapper">
-        <img
-          className="card__img"
-          src="https://placehold.co/289x173"
-          alt="image"
-        ></img>
-        <div className="card__text">
-          <h2 className="card__title">PRAGUE</h2>
-          <h3 className="card__price"> 0 dollars </h3>
-          <p className="card__description">this place is cool</p>
+      {destination.map((dest, index) => (
+        <div key={index} className="card__wrapper">
+          <img className="card__img" src={images[index]} alt="image" />
+          <div className="card__text">
+            <h2 className="card__title">{dest.name}</h2>
+            <h3 className="card__price">{dest.price}</h3>
+            <p className="card__description">{dest.description}</p>
+          </div>
         </div>
-      </div>
+      ))}
     </article>
   );
 }

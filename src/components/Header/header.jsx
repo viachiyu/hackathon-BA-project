@@ -1,7 +1,12 @@
 import HeaderImg from "../../assets/images/header.svg";
+import "./header.scss";
 
 function Header() {
-  return <img src={HeaderImg} alt="header" />;
+  return (
+    <header className="header">
+      <img className="header__image" src={HeaderImg} alt="header" />
+    </header>
+  );
 }
 
 export default Header;

@@ -10,14 +10,22 @@
 
   &__title {
     padding-bottom: 2rem;
+    font-size: 25px;
+    color: #021b41;
   }
 
   &__text {
     padding-bottom: 3rem;
+    font-size: 18px;
+    color: #021b41;
+  }
+  &__price {
+    color: #ce2110;
   }
 
   &__container {
     display: flex;
     gap: 8px;
+    width: 100%;
   }
 }
