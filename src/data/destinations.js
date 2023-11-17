@@ -3,25 +3,25 @@ const destinations = [
     name: "Prague",
     price: "From £0",
     description:
-      "Explore the historic streets and stunning architecture of Prague, where every corner tells a story.",
+      "Experience the magic of Prague and create unforgettable memories. Your journey awaits!",
   },
   {
     name: "Barcelona",
     price: "From £0",
     description:
-      "Discover the vibrant culture, beautiful beaches, and architectural wonders of Barcelona.",
+      "Redeem your voucher for Barcelona bliss – your next adventure awaits",
   },
   {
     name: "Amsterdam",
     price: "From £0",
     description:
-      "Experience the picturesque canals, historic museums, and lively atmosphere of Amsterdam.",
+      "Immerse yourself in the charm of Amsterdam and discover its vibrant culture!",
   },
   {
     name: "Venice",
-    price: "From £0",
+    price: "From £11",
     description:
-      "Navigate the romantic waterways and immerse yourself in the rich history of Venice.",
+      "Dreaming of Venice? Make it a reality – use your voucher for an unforgettable journey",
   },
   {
     name: "Paris",

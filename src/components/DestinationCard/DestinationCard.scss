@@ -5,10 +5,16 @@
 
 .card {
   display: flex;
+  flex-wrap: wrap;
   &__wrapper {
     width: 289px;
     height: 250px;
-    margin-right: 0.5rem;
+    margin-right: 2rem;
+    margin-bottom: 12rem;
+  }
+
+  &__link {
+    text-decoration: none;
   }
   &__text {
     background-color: white;
