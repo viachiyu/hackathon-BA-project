@@ -2,11 +2,8 @@ import "./DestinationCard.scss";
 import prague from "../../assets/images/Prague.svg";
 import barcelona from "../../assets/images/Barcelona.svg";
 import amsterdam from "../../assets/images/Amsterdam.svg";
-import venice from "../../assets/images/Venice.svg";
-import athens from "../../assets/images/Athens.svg";
-import paris from "../../assets/images/Paris.svg";
 
-const images = [prague, barcelona, amsterdam, venice, paris, athens];
+const images = [prague, barcelona, amsterdam];
 
 function DestinationCard({ destination }) {
   return (

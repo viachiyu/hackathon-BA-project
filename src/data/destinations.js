@@ -17,23 +17,5 @@ const destinations = [
     description:
       "Experience the picturesque canals, historic museums, and lively atmosphere of Amsterdam.",
   },
-  {
-    name: "Venice",
-    price: "From £11",
-    description:
-      "Navigate the romantic waterways and immerse yourself in the rich history of Venice.",
-  },
-  {
-    name: "Paris",
-    price: "From £15",
-    description:
-      "Indulge in the art, fashion, and culinary delights of the City of Light, Paris.",
-  },
-  {
-    name: "Athens",
-    price: "From £19",
-    description:
-      "Step back in time and explore the ancient ruins and vibrant culture of Athens.",
-  },
 ];
 export default destinations;
