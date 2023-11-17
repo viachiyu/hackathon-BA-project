@@ -5,12 +5,27 @@
 
 .card {
   display: flex;
+  width: 100%;
+  justify-content: center;
+
   &__wrapper {
     width: 289px;
-    height: 250px;
-    margin-right: 0.5rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; // Added transition for transform and box-shadow
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); // Added box-shadow on hover
+    }
   }
+
+  &__link {
+    text-decoration: none;
+  }
+
   &__text {
+    transform: translateY(-4px);
     background-color: white;
     padding: 2rem 1rem 1rem 1rem;
   }
