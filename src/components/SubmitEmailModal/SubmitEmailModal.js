@@ -17,19 +17,24 @@ function SubmitEmailModal({ closeModal }) {
     voucherUsed: false,
     submitError: false,
   });
-  const [email, setEmail] = useState({
-    email: "",
+  const [email, setEmail] = useState("");
+
+  const [modalMessage, setModalMessage] = useState({
+    title: `Your eVouchers`,
+    text: `Unsure whether you've got an eVoucher to use or how much you've
+  got to spend? Enter your email address below to check.`,
   });
-  const isUserFound = false;
-  const foundUser = {};
-  const foundVoucher = {};
+  let isUserFound = false;
+  let foundUser = {};
+  let foundVoucher = {};
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setEmail({ ...email, [name]: value });
+    const email = event.target;
+    setEmail(email.value);
   };
+
   const isEmailValid = () => {
-    if (!email.email.includes("@")) {
+    if (!email.includes("@")) {
       return false;
     }
     return true;
@@ -51,52 +56,54 @@ function SubmitEmailModal({ closeModal }) {
     if (!validateForm()) {
       return;
     }
-    try {
-      users.forEach((user) => {
-        if (user.email === email) {
-          isUserFound = true;
-          foundUser = user;
-          return foundUser;
-        }
-      });
-
-      if (!isUserFound) {
-        setErrors({
-          ...errors,
-          invalidEmail: true,
-        });
+    users.forEach((user) => {
+      if (user.email === email) {
+        isUserFound = true;
+        foundUser = user;
+        return foundUser;
       }
-      const findVoucher = () => {
-        vouchers.forEach((voucher) => {
-          if (foundUser.voucher_id === voucher.id) {
-            foundVoucher = voucher;
-            return foundVoucher;
-          }
-        });
-        if (!foundVoucher) {
-          setErrors({
-            ...errors,
-            noVoucher: true,
-          });
-        }
+    });
 
-        if (foundVoucher.isUsed === true) {
-          setErrors({
-            ...errors,
-            voucherUsed: true,
-          });
-        }
-        return setTimeout(navigate("/feature"), 4000);
-      };
-      findVoucher();
-    } catch (error) {
-      console.error(error);
+    if (!isUserFound) {
       setErrors({
         ...errors,
-        submitError: true,
+        noUserFound: true,
       });
+      setModalMessage({
+        title: "No eVouchers",
+        text: `It seems like there are no vouchers linked to this email. No
+        worries - plenty of exciting flight deals await!`,
+      });
+      return;
     }
+
+    const findVoucher = () => {
+      vouchers.forEach((voucher) => {
+        if (foundUser.voucher_id === voucher.id) {
+          foundVoucher = voucher;
+          return foundVoucher;
+        }
+      });
+      if (!foundVoucher) {
+        setErrors({
+          ...errors,
+          noVoucher: true,
+        });
+        return;
+      }
+
+      if (foundVoucher.isUsed === true) {
+        setErrors({
+          ...errors,
+          voucherUsed: true,
+        });
+        return;
+      }
+      return setTimeout(navigate("/feature"), 4000);
+    };
+    findVoucher();
   };
+
   return (
     <div className="submitmodal__background">
       <div className="submitmodal__container">
@@ -110,11 +117,8 @@ function SubmitEmailModal({ closeModal }) {
           </button>
         </div>
         <div className="submitmodal__title">
-          <p>You're eVouchers</p>
-          <p>
-            Unsure whether you've got an eVoucher to use or how much you've got
-            to spend? Enter your email address below to check.
-          </p>
+          <p>{modalMessage.title}</p>
+          <p>{modalMessage.text}</p>
         </div>
         <div className="submitmodal__body">
           <input
@@ -132,30 +136,6 @@ function SubmitEmailModal({ closeModal }) {
             <div className="details__error-container">
               <img src={error} className="details__icon" />
               <p className="details__error">This field is required</p>
-            </div>
-          )}
-          {errors.invalidEmail && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">Please enter a valid email</p>
-            </div>
-          )}
-          {errors.noUserFound && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">No user found</p>
-            </div>
-          )}
-          {errors.noVoucher && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">No voucher for this user</p>
-            </div>
-          )}
-          {errors.voucherUsed && (
-            <div className="details__error-container">
-              <img src={error} className="details__icon" />
-              <p className="details__error">Voucher has been used up</p>
             </div>
           )}
         </div>
