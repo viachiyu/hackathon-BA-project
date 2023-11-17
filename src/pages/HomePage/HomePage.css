@@ -15,10 +15,9 @@
 .footer {
   background-color: #ececed;
   width: 1280px;
-  height: 146px;
   display: flex;
   flex-direction: column;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 .voucher {
@@ -37,5 +36,13 @@
 .title {
   font-size: 25px;
   color: #021b41;
-  width: 758px;
+  width: 730px;
+  font-weight: 700;
+}
+
+.subhead {
+  font-size: 15px;
+  color: #021b41;
+  margin: 1.5rem 0 1.3rem;
+  font-weight: 700;
 }
