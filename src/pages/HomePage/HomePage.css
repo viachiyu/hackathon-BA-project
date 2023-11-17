@@ -13,11 +13,11 @@
   height: 348px;
 }
 .footer {
-  background-color: grey;
+  background-color: #ececed;
   width: 1280px;
-  height: 146px;
   display: flex;
   flex-direction: column;
+  padding: 2rem 0;
 }
 
 .voucher {
@@ -27,4 +27,22 @@
   background-color: #2e5c99;
   border: none;
   color: white;
+}
+
+.content {
+  margin-left: 12rem;
+}
+
+.title {
+  font-size: 25px;
+  color: #021b41;
+  width: 730px;
+  font-weight: 700;
+}
+
+.subhead {
+  font-size: 15px;
+  color: #021b41;
+  margin: 1.5rem 0 1.3rem;
+  font-weight: 700;
 }
