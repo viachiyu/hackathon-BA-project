@@ -14,17 +14,23 @@
   }
 
   &__text {
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     font-size: 18px;
     color: #021b41;
   }
   &__price {
     color: #ce2110;
+    font-size: 24px;
   }
 
   &__container {
     display: flex;
-    gap: 8px;
     width: 100%;
+    padding: 2rem 2rem 1rem 2rem;
+  }
+  &__button {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 3.5rem;
   }
 }
