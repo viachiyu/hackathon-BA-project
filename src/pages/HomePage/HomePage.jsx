@@ -15,7 +15,7 @@ function Home() {
       </div>
       <footer className="footer">
         <div className="content">
-          <p>
+          <p className="title">
             We have extended the expiry date of our eVouchers to September 2024
           </p>
           <p>See where your voucher can take you</p>

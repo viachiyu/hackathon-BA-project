@@ -102,8 +102,8 @@ function SubmitEmailModal({ closeModal }) {
           </button>
         </div>
         <div className="submitmodal__title">
-          <p>You're eVouchers</p>
-          <p>
+          <p className="modal_title">You're eVouchers</p>
+          <p className="modal_text">
             Unsure whether you've got an eVoucher to use or how much you've got
             to spend? Enter your email address below to check.
           </p>
