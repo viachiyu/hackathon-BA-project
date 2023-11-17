@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import the navigate function if using React Routerx
-import Close from "../../assets/icons/down-arrow.svg";
+import Close from "../../assets/icons/header_cross 1.svg";
 import "./Modal.css";
 import error from "../../assets/icons/down-arrow.svg";
 import users from "../../data/users";
@@ -134,8 +134,8 @@ function SubmitEmailModal({ closeModal }) {
           </button>
         </div>
         <div className="submitmodal__title">
-          <p>{modalMessage.title}</p>
-          <p>{modalMessage.text}</p>
+          <p className="modal_title">{modalMessage.title}</p>
+          <p className="modal_text">{modalMessage.text}</p>
         </div>
         <div className="submitmodal__body">
           <input
