@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import the navigate function if using React Routerx
-import Close from "../../assets/icons/header_cross 1.svg";
+import Close from "../../assets/icons/header_cross_1.svg";
 import "./Modal.css";
 import error from "../../assets/icons/down-arrow.svg";
 import users from "../../data/users";
