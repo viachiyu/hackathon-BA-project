@@ -16,6 +16,8 @@
   background-color: grey;
   width: 1280px;
   height: 146px;
+  display: flex;
+  flex-direction: column;
 }
 
 .voucher {

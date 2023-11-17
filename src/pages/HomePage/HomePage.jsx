@@ -14,20 +14,22 @@ function Home() {
         </div>
       </div>
       <footer className="footer">
-        <p>
-          We have extended the expiry date of our eVouchers to September 2024
-        </p>
-        <p>See where your voucher can take you</p>
-        <button
-          src={Close}
-          alt="icon"
-          className="voucher"
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        >
-          Check your voucher
-        </button>
+        <div className="content">
+          <p>
+            We have extended the expiry date of our eVouchers to September 2024
+          </p>
+          <p>See where your voucher can take you</p>
+          <button
+            src={Close}
+            alt="icon"
+            className="voucher"
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          >
+            Check your voucher
+          </button>
+        </div>
       </footer>
 
       {openModal && <SubmitEmailModal closeModal={setOpenModal} />}

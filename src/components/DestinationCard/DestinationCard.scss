@@ -4,12 +4,30 @@
 @use "../../styles/partials/variables" as *;
 
 .card {
+  display: flex;
   &__wrapper {
     width: 289px;
     height: 250px;
+    margin-right: 0.5rem;
   }
   &__text {
     background-color: white;
-    height: 177px;
+    padding: 2rem 1rem 1rem 1rem;
+  }
+
+  &__title {
+    color: #2e5c99;
+    font-size: 20px;
+    padding-bottom: 0.75rem;
+  }
+
+  &__price {
+    color: #ce2110;
+    padding-bottom: 0.75rem;
+  }
+
+  &__description {
+    color: #424b5a;
+    padding-bottom: 2rem;
   }
 }
