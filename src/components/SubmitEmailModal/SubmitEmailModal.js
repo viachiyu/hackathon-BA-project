@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"; // Import the navigate function 
 import Close from "../../assets/icons/down-arrow.svg";
 import "./Modal.css";
 import error from "../../assets/icons/down-arrow.svg";
+import users from "../../data/users";
+import vouchers from "../../data/vouchers";
 
 function SubmitEmailModal({ closeModal }) {
   const navigate = useNavigate();
@@ -18,6 +20,10 @@ function SubmitEmailModal({ closeModal }) {
   const [email, setEmail] = useState({
     email: "",
   });
+  const isUserFound = false;
+  const foundUser = {};
+  const foundVoucher = {};
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setEmail({ ...email, [name]: value });
@@ -40,47 +46,49 @@ function SubmitEmailModal({ closeModal }) {
     });
     return emailValid;
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (!validateForm()) {
       return;
     }
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/users",
-        email
-      );
-      if (!response.data) {
+      users.forEach((user) => {
+        if (user.email === email) {
+          isUserFound = true;
+          foundUser = user;
+          return foundUser;
+        }
+      });
+
+      if (!isUserFound) {
         setErrors({
           ...errors,
-          noUserFound: true,
+          invalidEmail: true,
         });
-      } else {
-        // Destructure directly if you're not using the whole response object
-        const { hasVoucher, voucherUsed } = response.data;
-        if (!hasVoucher) {
+      }
+      const findVoucher = () => {
+        vouchers.forEach((voucher) => {
+          if (foundUser.voucher_id === voucher.id) {
+            foundVoucher = voucher;
+            return foundVoucher;
+          }
+        });
+        if (!foundVoucher) {
           setErrors({
             ...errors,
             noVoucher: true,
           });
-        } else if (voucherUsed) {
+        }
+
+        if (foundVoucher.isUsed === true) {
           setErrors({
             ...errors,
             voucherUsed: true,
           });
-        } else {
-          const voucherResponse = await axios.get(
-            `http://localhost:8080/api/vouchers?email=${email.email}`
-          );
-
-          if (voucherResponse.status === 201) {
-            navigate("/suggestions");
-            setTimeout(() => {
-              navigate("/features");
-            }, 4000);
-          }
         }
-      }
+        return setTimeout(navigate("/feature"), 4000);
+      };
+      findVoucher();
     } catch (error) {
       console.error(error);
       setErrors({
