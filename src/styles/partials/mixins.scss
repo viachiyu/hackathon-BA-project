@@ -1,0 +1,12 @@
+@use "./variables.scss" as *;
+
+@mixin desktop {
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop-max {
+  max-width: $desktop-max-width;
+  margin: 0 auto;
+}

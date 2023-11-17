@@ -1,0 +1,23 @@
+@use "../../styles/partials/reset.scss";
+@use "../../styles/partials/typography.scss";
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.feature {
+  background-color: #ececed;
+  height: 100vh;
+  padding: 3rem 6rem;
+
+  &__title {
+    padding-bottom: 2rem;
+  }
+
+  &__text {
+    padding-bottom: 3rem;
+  }
+
+  &__container {
+    display: flex;
+    gap: 8px;
+  }
+}
