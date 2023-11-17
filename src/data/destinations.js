@@ -13,7 +13,7 @@ const destinations = [
   },
   {
     name: "Amsterdam",
-    price: "From £0",
+    price: "From £15",
     description:
       "Immerse yourself in the charm of Amsterdam and discover its vibrant culture!",
   },
