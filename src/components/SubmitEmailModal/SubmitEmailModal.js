@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios"; // Import axios for making HTTP requests
 import { useNavigate } from "react-router-dom"; // Import the navigate function if using React Routerx
 import Close from "../../assets/icons/down-arrow.svg";
 import "./Modal.css";
@@ -42,8 +41,8 @@ function SubmitEmailModal({ closeModal }) {
   const validateForm = () => {
     const emailValid = isEmailValid();
     setErrors({
-      emailRequired: !email.email,
-      invalidEmail: email.email && !emailValid,
+      emailRequired: !email,
+      invalidEmail: email && !emailValid,
       noUserFound: false,
       noVoucher: false,
       voucherUsed: false,
@@ -89,6 +88,11 @@ function SubmitEmailModal({ closeModal }) {
           ...errors,
           noVoucher: true,
         });
+        setModalMessage({
+          title: "No eVouchers",
+          text: `It seems like there are no vouchers linked to this email. No
+          worries - plenty of exciting flight deals await!`,
+        });
         return;
       }
 
@@ -97,9 +101,22 @@ function SubmitEmailModal({ closeModal }) {
           ...errors,
           voucherUsed: true,
         });
+        setModalMessage({
+          title: "No eVouchers",
+          text: `It seems like there are no vouchers linked to this email. No
+          worries - plenty of exciting flight deals await!`,
+        });
         return;
       }
-      return setTimeout(navigate("/feature"), 4000);
+
+      setModalMessage({
+        title: "eVouchers found",
+        text: "You have eVouchers to spend! Generating a great getaway for you now!",
+      });
+
+      return setTimeout(() => {
+        navigate("/feature");
+      }, 4000);
     };
     findVoucher();
   };
