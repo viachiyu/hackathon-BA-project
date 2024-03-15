@@ -12,7 +12,7 @@ Next Steps:
 - Slider of more personalised destination cards
 - Overlay feature to be on each page of BA's website
 
-The Team:
+The Team:  
 Product Designer - Madi Leal (C), Medina Nabiyeva                                                                          
 Data Scientists - Faisal Abu (C), Mohamed Farah  
 Software Engineers - Olivia Chu (C), Lara Russo, Fioren Nathasia
